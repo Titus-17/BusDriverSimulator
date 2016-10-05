@@ -10,6 +10,7 @@
 #include "House.hpp"
 #include "GLFunc.hpp"
 
+extern int window;
 
 int main(int argc, char **argv) 
 {
@@ -27,7 +28,7 @@ int main(int argc, char **argv)
     glutInitWindowPosition(0, 0);  
 
     /* Open a window */  
-    int window = glutCreateWindow("Window 1");  
+    window = glutCreateWindow("Window 1");  
 
     /* Register the function to do all our OpenGL drawing. */
     glutDisplayFunc(&DrawGLScene); 

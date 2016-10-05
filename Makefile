@@ -7,10 +7,19 @@ OBJECT = -c
 CFLAGS = $(COMPILERFLAGS) $(INCLUDE)
 LIBRARIES = -lX11 -lXi -lXmu -lglut -lGL -lGLU -lm
 
-BusDriver:
-	$(CC) $(OBJECT) House.cpp -lglut -lGL -lGLU
-	$(CC) $(OBJECT) $(CFLAGS) GLFunc.cpp $(LIBDIR) $(LIBRARIES)
-	$(CC) House.o GLFunc.o Bus_simulator.cpp -o $@ $(CFLAGS) $(LIBDIR) $< $(LIBRARIES)
+all: BusDriver
+
+BusDriver: GLFunc.o House.o Bus_simulator.o
+	$(CC) House.o GLFunc.o Bus_simulator.o -o BusDriver $(CFLAGS) $(LIBDIR) $(LIBRARIES)
+
+House.o: House.cpp
+	$(CC) $(OBJECT) House.cpp
+
+GLFunc.o: GLFunc.cpp
+	$(CC) $(OBJECT)  GLFunc.cpp
+
+Bus_simulator: Bus_simulator.cpp
+	$(CC) $(OBJECT) Bus_simulator.cpp
+
 clean:
-	rm -f *.o
-	rm BusDriver
+	rm -f *.o BusDriver
