@@ -1,1 +1,1 @@
-# BusDriverSimulatorMaximov (BDSM)
+# BusDriverSimulatorMax (BDSM)
