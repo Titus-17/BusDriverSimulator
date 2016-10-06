@@ -24,8 +24,9 @@ public:
 	int getw();
 	int getl();
 	int geth();
-	House(int tx, int ty, int tz, int tw, int tl, int th);
+	House(int tx, int tz, int ty, int tw, int tl, int th);
 	void BuildHouse();
+	void BuildBorder();
 };
 
 #endif

@@ -22,7 +22,7 @@ int House::setz(int tz){z = tz;}
 int House::setw(int tw){w = tw;}
 int House::setl(int tl){l = tl;}
 int House::seth(int th){h = th;}
-House::House(int tx, int ty, int tz, int tw, int tl, int th)
+House::House(int tx, int tz, int ty, int tw, int tl, int th)
 {
 	x = tx;
 	y = ty;
@@ -36,27 +36,64 @@ void House::BuildHouse()
 	glBegin(GL_QUADS);
 		//Front face
 		glColor3f(0.99, 0.85, 0.49);
-		glTexCoord2f(0, 0); glVertex3f(x - w/2, -1, z - l/2);   		// Bottom Left Of The Texture and Quad
-		glTexCoord2f(w/0.1, 0); glVertex3f(x + w/2, -1, z - l/2);   	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(0, 0);			glVertex3f(x - w/2, -1, z - l/2);   // Bottom Left Of The Texture and Quad
+		glTexCoord2f(w/0.1, 0); 	glVertex3f(x + w/2, -1, z - l/2);   // Bottom Right Of The Texture and Quad
 		glTexCoord2f(w/0.1, h/0.1); glVertex3f(x + w/2,  h, z - l/2);   // Top Right Of The Texture and Quad
-		glTexCoord2f(0, h/0.1); glVertex3f(x - w/2,  h, z - l/2);   	// Top Left Of The Texture and Quad
+		glTexCoord2f(0, h/0.1); 	glVertex3f(x - w/2,  h, z - l/2);   // Top Left Of The Texture and Quad
 
 		// Back Face
-		glTexCoord2f(w/0.1, 0); glVertex3f(x + w/2, -1, z + l/2);   	// Bottom Right Of The Texture and Quad
+		glTexCoord2f(w/0.1, 0); 	glVertex3f(x + w/2, -1, z + l/2);   // Bottom Right Of The Texture and Quad
 		glTexCoord2f(w/0.1, h/0.1); glVertex3f(x + w/2,  h, z + l/2);   // Top Right Of The Texture and Quad
-		glTexCoord2f(0, h/0.1); glVertex3f(x - w/2,  h, z + l/2);   	// Top Left Of The Texture and Quad
-		glTexCoord2f(0, 0); glVertex3f(x - w/2, -1, z + l/2);   		// Bottom Left Of The Texture and Quad
+		glTexCoord2f(0, h/0.1); 	glVertex3f(x - w/2,  h, z + l/2);   // Top Left Of The Texture and Quad
+		glTexCoord2f(0, 0);		 	glVertex3f(x - w/2, -1, z + l/2);   // Bottom Left Of The Texture and Quad
 
 		// Right face
-		glTexCoord2f(l/0.1, 0); glVertex3f(x + w/2, -1, z + l/2);   	// Bottom Right Of The Texture and Quad
-		glTexCoord2f(l/0.1, h/0.1); glVertex3f(x + w/2,  h, z + l/2);   // Top Right Of The Texture and Quad
-		glTexCoord2f(0, h/0.1); glVertex3f(x + w/2,  h, z - l/2);   	// Top Left Of The Texture and Quad
-		glTexCoord2f(0, 0); glVertex3f(x + w/2, -1, z - l/2);   		// Bottom Left Of The Texture and Quad
+		glTexCoord2f(l/0.1, 0);		glVertex3f(x + w/2, -1, z + l/2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(l/0.1, h/0.1);	glVertex3f(x + w/2,  h, z + l/2);   // Top Right Of The Texture and Quad
+		glTexCoord2f(0, h/0.1);		glVertex3f(x + w/2,  h, z - l/2);   // Top Left Of The Texture and Quad
+		glTexCoord2f(0, 0);			glVertex3f(x + w/2, -1, z - l/2);   // Bottom Left Of The Texture and Quad
 
 		// Left Face
-		glTexCoord2f(0, 0); glVertex3f(x - w/2, -1, z + l/2);   		// Bottom Left Of The Texture and Quad
-		glTexCoord2f(l/0.1, 0); glVertex3f(x - w/2, -1, z - l/2);   	// Bottom Right Of The Texture and Quad
-		glTexCoord2f(l/0.1, h/0.1); glVertex3f(x - w/2,  h, z - l/2);   // Top Right Of The Texture and Quad
-		glTexCoord2f(0, h/0.1); glVertex3f(x - w/2,  h, z + l/2);   	// Top Left Of The Texture and Quad
+		glTexCoord2f(0, 0);			glVertex3f(x - w/2, -1, z + l/2);   // Bottom Left Of The Texture and Quad
+		glTexCoord2f(l/0.1, 0);		glVertex3f(x - w/2, -1, z - l/2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(l/0.1, h/0.1);	glVertex3f(x - w/2,  h, z - l/2);   // Top Right Of The Texture and Quad
+		glTexCoord2f(0, h/0.1);		glVertex3f(x - w/2,  h, z + l/2);   // Top Left Of The Texture and Quad
+	glEnd();
+}
+void House::BuildBorder()
+{
+	glBegin(GL_QUADS);
+		
+		glColor3f(0.57, 0.54, 0.52);
+		//Front face
+		glTexCoord2f(0, 0);	glVertex3f(x - w/2 - 2, -1, z - l/2 - 2);   // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1, 0); glVertex3f(x + w/2 + 2, -1, z - l/2 - 2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1, 1); glVertex3f(x + w/2 + 2,  -0.9, z - l/2 - 2);   // Top Right Of The Texture and Quad
+		glTexCoord2f(0, 1); glVertex3f(x - w/2 - 2,  -0.9, z - l/2 - 2);   // Top Left Of The Texture and Quad
+
+		// Back Face
+		glTexCoord2f(1, 0); glVertex3f(x + w/2 + 2, -1, z + l/2 + 2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1, 1); glVertex3f(x + w/2 + 2,  -0.9, z + l/2 + 2);   // Top Right Of The Texture and Quad
+		glTexCoord2f(0, 1); glVertex3f(x - w/2 - 2,  -0.9, z + l/2 + 2);   // Top Left Of The Texture and Quad
+		glTexCoord2f(0, 0);	glVertex3f(x - w/2 - 2, -1, z + l/2 + 2);   // Bottom Left Of The Texture and Quad
+
+		// Right face
+		glTexCoord2f(1, 0);	glVertex3f(x + w/2 + 2, -1, z + l/2 + 2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1, 1);	glVertex3f(x + w/2 + 2,  -0.9, z + l/2 + 2);   // Top Right Of The Texture and Quad
+		glTexCoord2f(0, 1);	glVertex3f(x + w/2 + 2,  -0.9, z - l/2 - 2);   // Top Left Of The Texture and Quad
+		glTexCoord2f(0, 0);	glVertex3f(x + w/2 + 2, -1, z - l/2 - 2);   // Bottom Left Of The Texture and Quad
+
+		// Left Face
+		glTexCoord2f(0, 0);	glVertex3f(x - w/2 - 2, -1, z + l/2 + 2);   // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1, 0);	glVertex3f(x - w/2 - 2, -1, z - l/2 - 2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1, 1);	glVertex3f(x - w/2 - 2,  -0.9, z - l/2 - 2);   // Top Right Of The Texture and Quad
+		glTexCoord2f(0, 1);	glVertex3f(x - w/2 - 2,  -0.9, z + l/2 + 2);   // Top Left Of The Texture and Quad
+
+		glColor3f(0.91, 0.86, 0.77);
+		// Roof
+		glTexCoord2f(0, 0);	glVertex3f(x - w/2 - 2, -0.9, z - l/2 - 2);   // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1, 0);	glVertex3f(x + w/2 + 2, -0.9, z - l/2 - 2);   // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1, 1); glVertex3f(x + w/2 + 2, -0.9, z + l/2 + 2);  // Top Right Of The Texture and Quad
+		glTexCoord2f(0, 1);	glVertex3f(x - w/2 - 2, -0.9, z + l/2 + 2);  // Top Left Of The Texture and Quad
 	glEnd();
 }

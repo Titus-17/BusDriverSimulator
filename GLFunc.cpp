@@ -64,10 +64,10 @@ void filescan()
 		H[i].setx(atoi(mas[0].c_str()));
 
 		getline(fin, mas[1], ',');
-		H[i].sety(atoi(mas[1].c_str()));
+		H[i].setz(atoi(mas[1].c_str()));
 
 		getline(fin, mas[2], ',');
-		H[i].setz(atoi(mas[2].c_str()));
+		H[i].sety(atoi(mas[2].c_str()));
 
 		getline(fin, mas[3], ',');
 		H[i].setw(atoi(mas[3].c_str()));
@@ -121,10 +121,10 @@ void BuildScene()
 	
 	glBegin(GL_QUADS);                                  //Отрисовка сцены
 		glColor3f(0.36, 0.63, 0.18);
-		glTexCoord2f(1, 1); glVertex3f(75, -1, 75);     // Top Right Of The Texture and Quad
-		glTexCoord2f(0, 1); glVertex3f(-75, -1, 75);    // Top Left Of The Texture and Quad
-		glTexCoord2f(0, 0); glVertex3f(-75, -1, -75);   // Bottom Left Of The Texture and Quad
-		glTexCoord2f(1, 0); glVertex3f(75, -1, -75);    // Bottom Right Of The Texture and Quad
+		glTexCoord2f(1, 1); glVertex3f(20, -1, 20);     // Top Right Of The Texture and Quad
+		glTexCoord2f(0, 1); glVertex3f(-20, -1, 20);    // Top Left Of The Texture and Quad
+		glTexCoord2f(0, 0); glVertex3f(-20, -1, -20);   // Bottom Left Of The Texture and Quad
+		glTexCoord2f(1, 0); glVertex3f(20, -1, -20);    // Bottom Right Of The Texture and Quad
 	glEnd();                                            // done with the polygon.
 }
 
@@ -312,7 +312,7 @@ GLvoid LoadGLTextures()
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
 GLvoid InitGL(GLsizei Width, GLsizei Height)			// We call this right after our OpenGL window is created.
 {
-	LoadGLTextures();                     		// load the textures.
+	LoadGLTextures();                     				// load the textures.
 	glEnable(GL_TEXTURE_2D);                    		// Enable texture mapping.
 
 	glClearColor(0.5, 0.78, 1, 0);						// This Will Clear The Background Color To Black
@@ -340,22 +340,21 @@ GLvoid DrawGLScene()
 	
 	yl = 360 - yrot;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
-	glLoadIdentity();									// Reset The View
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear The Screen And The Depth Buffer
+	glLoadIdentity();										// Reset The View
 	
 	glRotatef(yl, 0, 1.0f, 0);
 
 	glTranslatef(x,0.0f, z);								// move z units out from the screen.
-	// glTranslatef(ylr, 0, 0);
-	// glTranslatef(yspeed, 0, 0);						// move z units out from the screen.
-									// Rotate On The Y Axis
-	glBindTexture(GL_TEXTURE_2D, texture2[filter]);		// choose the texture to use.
+	glBindTexture(GL_TEXTURE_2D, texture2[filter]);			// choose the texture to use.
 
 	for (j = 0; j < getCount(); j++)
 		H[j].BuildHouse();
-
+	glBindTexture(GL_TEXTURE_2D, texture[filter]);
+	for (j = 0; j < getCount(); j++)
+		H[j].BuildBorder();
 	BuildScene();
-	yrot += yspeed;										// Y Axis Rotation
+	yrot += yspeed;											// Y Axis Rotation
 
 	// since this is double buffered, swap the buffers to display what just got drawn.
 	glutSwapBuffers();
